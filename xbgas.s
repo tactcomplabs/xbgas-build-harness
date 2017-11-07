@@ -11,6 +11,6 @@
   .globl xbgas_func
   .type xbgas_func, @function
 xbgas_func:
-  jalr x0,x1,0    #-- return
+  jalr x0,0,x1
 
 # EOF

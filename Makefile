@@ -5,9 +5,10 @@ EXE=xbgas
 CC=$(RISCV)/bin/riscv64-unknown-elf-gcc
 CXX=$(RISCV)/bin/riscv64-unknown-elf-g++
 XBGAS_AS=$(RISCV)/bin/llvm-mc
-XBGAS_AS_FLAGS=-assemble -filetype=obj -triple=riscv-unknown-linux -show-encoding -mcpu=xbgas
+XBGAS_AS_FLAGS=-assemble -filetype=obj -triple=riscv-unknown-linux -show-encoding -mcpu=xBGAS
 CFLAGS=-O0 -g
 CXXFLAGS=-O0 -g
+OBJS=main.o xbgas.o
 
 all: $(EXE).exe
 xbgas.o: xbgas.s
@@ -15,4 +16,7 @@ xbgas.o: xbgas.s
 main.o: main.c
 	$(CC) $(CFLAGS) -c -o $@ $<
 $(EXE).exe: main.o xbgas.o
-	$(CC) -o $@ $<
+	$(CC) -o $@ $(OBJS)
+clean:
+	rm -Rf *.o *.exe
+
